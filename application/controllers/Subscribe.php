@@ -10,22 +10,12 @@ class Subscribe extends CI_Controller {
 
     public function submit()
     {
-        // $name=$this->input->post('inputName');
-        // $phone=$this->input->post('inputPhone');
-
-        // $success_message=$this->Subscribemodel->subscriber($name,$phone);
-        
-        // return redirect('subscribe',$success_message);
-
-
-
-        $this->load->library('form_validation');
 		 $this->form_validation->set_rules('inputName','Name','required|alpha|trim');
 		 $this->form_validation->set_rules('inputPhone','Phone','required');
-		$this->form_validation->set_error_delimiters("<p class='text-danger'>","</p>");
+		 $this->form_validation->set_error_delimiters("<p class='text-danger'>","</p>");
 		
-		if( $this->form_validation->run('subscribe') ) { //if validation passes
-			//Success
+		if( $this->form_validation->run('subscribe') ) {
+			
 			$name = $this->input->post('inputName');
 			$phone = $this->input->post('inputPhone');
 			$success_message=$this->Subscribemodel->subscriber($name,$phone);
@@ -37,10 +27,7 @@ class Subscribe extends CI_Controller {
 				return redirect('subscribe');
 			}
 		} else {
-			//Failed.
-			
 			$this->load->view('subscribe');
-			// echo validation_errors();
 		}
         
 
