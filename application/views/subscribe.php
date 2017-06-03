@@ -65,7 +65,7 @@
                                     <div class="form-group">
                                     <label for="inputPhone" class="col-lg-2 control-label">Phone</label>
                                           <div class="col-lg-6">
-                                                <?php echo form_input(['class'=>'form-control','id'=>'inputPhone','placeholder'=>'+92 3474362487',
+                                                <?php echo form_input(['class'=>'form-control','id'=>'inputPhone','placeholder'=>'Enter Valid No.',
                                                 'name'=>'inputPhone','value' => set_value('inputPhone')]); ?>
                                           </div>
                                     </div>
