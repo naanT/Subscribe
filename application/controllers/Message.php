@@ -6,6 +6,8 @@ class Message extends CI_Controller{
   public function __construct()
   {
     parent::__construct();
+      $smsGateway = new SmsGateway('raohannan1@gmail.com', 'hannan123');
+      $deviceID = 48750;
   }
 
 public function index()
@@ -14,15 +16,16 @@ public function index()
 }
   public function submit()
   {
-    $smsGateway = new SmsGateway('raohannan1@gmail.com', 'hannan123');
-    $deviceID = 48750;
+    // $smsGateway = new SmsGateway('raohannan1@gmail.com', 'hannan123');
+    // $deviceID = 48750;
 
     $message=$this->input->post('text_message');
     $numbers=json_decode($this->input->post('phone'));
 
+
     $result = $smsGateway->sendMessageToManyNumbers($numbers, $message, $deviceID);
 
-      for ($i=0; $i <=sizeof($result); $i++)
+      for ($i=0; $i <sizeof($result); $i++)
       {
           // don't forget to implement send_at logic here
 
@@ -30,19 +33,19 @@ public function index()
         $text_message=$result["response"]["result"]["success"][$i]["message"];
         $message_created_at=$result["response"]["result"]["success"][$i]["created_at"];
         $message_status=$result["response"]["result"]["success"][$i]["status"];
-        $message_send_at=$result["response"]["result"]["success"][$i]["send_at"];
+        // $message_send_at=$result["response"]["result"]["success"][$i]["send_at"];
 
         $this->Messagemodel->add_message($message_id,$text_message,$message_created_at,
-                    $message_status,$message_send_at);
+                    $message_status);
       }
   }
 
   public function savestatus()
   {
-      $smsGateway = new SmsGateway('raohannan1@gmail.com', 'hannan123');
-      $deviceID = 48750;
+    
 
       $ids=$this->Messagemodel->get_ids();
+
       $re=array();
 
       for ($i=0; $i < sizeof($ids); $i++) {
@@ -68,6 +71,12 @@ public function index()
   {
     $stat=$this->Messagemodel->get_status();
      echo json_encode($stat);
+  }
+
+  public function incoming()
+  {
+      
+      
   }
 
 }

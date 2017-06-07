@@ -9,10 +9,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <title>Sayings of the Messenger P.B.U.H</title>
      <link rel="stylesheet" href="http://bootswatch.com/slate/bootstrap.min.css">
        <?= link_tag('assets/css/ahadith.css') ?>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-      <script src="https://cdn.ckeditor.com/4.7.0/standard/ckeditor.js"></script>
-
 
 <script type="text/javascript">
     var no_of_contacts = 0;
@@ -55,7 +54,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
          for (var i = 1; i<=no_of_contacts; i++) {
            number[i-1] = $("#no"+i) .val();
         }
-            var textarea = $('#editor1').val();
+            var textarea = $('#textArea').val();
+            console.log(number);
 
         jQuery.ajax({
           type: "POST",
@@ -66,7 +66,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             phone        : JSON.stringify(number)
           },
         success: function(res) {
-
           $.get("<?php echo base_url(); ?>" + "message/savestatus",
                 function(res, status){
                           console.log(" x: " + res);
@@ -81,10 +80,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           $.get("<?php echo base_url(); ?>" + "message/getstatus",
                   function(result, status){
                     var textstatus=JSON.parse(result);
-                    console.log(textstatus[0]);
+                    console.log(textstatus.length);
 
                     for (var i = 0; i < textstatus.length; i++) {
                       var ele=document.getElementsByClassName("info");
+                      
                       ele[i].innerHTML=textstatus[i];
                     }
                   });
@@ -111,7 +111,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <div class="form-group">
             <div class="col-lg-8">
                 <?php echo form_textarea(['class' => 'form-control' ,
-                'id' => 'editor1' ,'rows' => 10 , 'name' => 'messageText' , 'placeholder' => 'Write Hadith Here']); ?>
+                'id' => 'textArea' ,'rows' => 10 , 'name' => 'messageText' , 'placeholder' => 'Write Hadith Here']); ?>
             </div>
           </div>
         </div>
@@ -142,8 +142,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </div>
         
     </div>
-    <script>
+    <!--<script>
             CKEDITOR.replace( 'editor1' );
-        </script>
+        </script>-->
   </body>
 </html>

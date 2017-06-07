@@ -10,14 +10,13 @@ private $msgtime=array();
   }
 
   public function add_message($message_id,$text_message,
-                              $created_at,$message_status,$send_at)
+                              $created_at,$message_status)
   {
     $data = array(
         'message_id' => $message_id,
         'message' => $text_message,
         'message_status'  => $message_status,
-        'created_at' => date("Y-m-d H:i:s" , $created_at),
-        'send_at'  =>  $send_at
+        'created_at' => date("Y-m-d H:i:s" , $created_at)
 );
     $this->msgtime[]=date("Y-m-d H:i:s" , $created_at);
     $this->db->insert('hadith', $data);
@@ -33,7 +32,7 @@ public function get_ids()
 
     foreach($query->result_array() as $row)
     {
-      if ($this->msgtime==$row['$created_at']) {
+      if ($this->msgtime==$row['created_at']) {
         $array[] = $row['message_id'];
       }
     }
@@ -54,6 +53,7 @@ public function get_ids()
 
     $query=$this->db->select(['*'])
               ->from('subscriber')
+              ->where('is_subscribed',1)
               ->get();
 
     return $query->result_array();
@@ -62,7 +62,7 @@ public function get_ids()
   public function get_status()
   {
 
-    $get_contact=$this->db->get('subscriber');
+    $get_contact=$this->db->from('subscriber')->where('is_subscribed',1)->get();
     $count_contact=$get_contact->num_rows();
 
 
