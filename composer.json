@@ -15,7 +15,7 @@
 		"giggsey/libphonenumber-for-php": "^8.5",
 		"jublonet/codebird-php": "^3.1",
 		"lukasss93/telegrambot-php": "^1.2"
-	},
+		},
 	"suggest": {
 		"paragonie/random_compat": "Provides better randomness in PHP 5.x"
 	},
