@@ -30,7 +30,7 @@ $media_ids = implode(',', $media_ids);
 
 // send Tweet with these medias
 $reply = $cb->statuses_update([
-  'status' => 'hi! finally images is uploades',
+  'status' => 'hi! finally images is uploaded',
   'media_ids' => $media_ids
 ]);
 print_r($reply);
