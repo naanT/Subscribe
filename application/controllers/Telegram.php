@@ -31,10 +31,10 @@ class Telegram extends CI_Controller {
                 $token='303724118:AAEM1zlVreJQXAxsqrHH95a-TulbHyscuQs';
                 $telegram = new TelegramBot\TelegramBot($token);
 
-                $telegram->sendMessage([
-                    'chat_id' => '@subscribenaan',
-                    'text' => $post
-                ]);
+                // $telegram->sendMessage([
+                //     'chat_id' => '@subscribenaan',
+                //     'text' => $post
+                // ]);
             
 
                 // $img = curl_file_create($image_path,'image/png');
@@ -42,7 +42,8 @@ class Telegram extends CI_Controller {
 
                 $telegram->sendPhoto([
                     'chat_id' => '@subscribenaan', 
-                    'photo' => $image_path
+                    'photo' => $image_path,
+                    'caption' => $post
                 ]);
             
 
