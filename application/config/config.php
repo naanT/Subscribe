@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost/subscribe/';
+$config['base_url'] = 'http://e2dbd61a.ngrok.io/subscribe/';
 
 /*
 |--------------------------------------------------------------------------
