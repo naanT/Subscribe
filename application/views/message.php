@@ -49,13 +49,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             });
       $(".submit").click(function(event) {
         event.preventDefault();
-        console.log("getting here");
         var number= new Array();
          for (var i = 1; i<=no_of_contacts; i++) {
-           number[i-1] = $("#no"+i) .val();
+            number[i-1] = $("#no"+i) .val();
         }
             var textarea = $('#textArea').val();
-            console.log(number);
 
         jQuery.ajax({
           type: "POST",
@@ -66,9 +64,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             phone        : JSON.stringify(number)
           },
         success: function(res) {
+          alert("sending...");
           $.get("<?php echo base_url(); ?>" + "message/savestatus",
                 function(res, status){
-                          // console.log(" x: " + res);
+                  console.log(res);
                 });
        },
        error: function(){
