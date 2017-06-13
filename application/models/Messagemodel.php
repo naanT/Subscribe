@@ -25,16 +25,16 @@ private $msgtime=array();
 
 public function get_ids()
 {
-      $query=$this->db->select(['*'])
+      $query=$this->db->select('*')
                       ->from('hadith')
                       ->get();
     $array = array();
 
     foreach($query->result_array() as $row)
     {
-      if ($this->msgtime==$row['created_at']) {
+      // if ($this->msgtime==$row['created_at']) {
         $array[] = $row['message_id'];
-      }
+      // }
     }
     return $array;
 }

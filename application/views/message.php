@@ -68,7 +68,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         success: function(res) {
           $.get("<?php echo base_url(); ?>" + "message/savestatus",
                 function(res, status){
-                          console.log(" x: " + res);
+                          // console.log(" x: " + res);
                 });
        },
        error: function(){

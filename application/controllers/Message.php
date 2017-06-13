@@ -6,8 +6,6 @@ class Message extends CI_Controller{
   public function __construct()
   {
     parent::__construct();
-      $smsGateway = new SmsGateway('raohannan1@gmail.com', 'hannan123');
-      $deviceID = 48750;
   }
 
 public function index()
@@ -16,8 +14,8 @@ public function index()
 }
   public function submit()
   {
-    // $smsGateway = new SmsGateway('raohannan1@gmail.com', 'hannan123');
-    // $deviceID = 48750;
+    $smsGateway = new SmsGateway('raohannan1@gmail.com', 'hannan123');
+    $deviceID = 48750;
 
     $message=$this->input->post('text_message');
     $numbers=json_decode($this->input->post('phone'));
@@ -42,8 +40,9 @@ public function index()
 
   public function savestatus()
   {
+      $smsGateway = new SmsGateway('raohannan1@gmail.com', 'hannan123');
+      $deviceID = 48750;
     
-
       $ids=$this->Messagemodel->get_ids();
 
       $re=array();
@@ -52,11 +51,12 @@ public function index()
         $re[] = $smsGateway->getMessage($ids[$i]);
 
       }
+      
         $statusText=array();
       for ($j=0; $j < sizeof($re); $j++) {
         $statusText[]= $re[$j]["response"]["result"]["status"];
       }
-
+      
       $this->Messagemodel->save_status($ids,$statusText);
       echo json_encode($statusText);
   }
