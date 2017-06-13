@@ -20,10 +20,10 @@ public function index()
     $message=$this->input->post('text_message');
     $numbers=json_decode($this->input->post('phone'));
 
-
     $result = $smsGateway->sendMessageToManyNumbers($numbers, $message, $deviceID);
 
-      for ($i=0; $i <sizeof($result); $i++)
+
+      for ($i=0; $i <sizeof($numbers); $i++)
       {
           // don't forget to implement send_at logic here
 
