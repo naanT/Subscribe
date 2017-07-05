@@ -1,8 +1,5 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
-
-
 class Telegram extends CI_Controller {
 		
 	public function index()
@@ -15,41 +12,35 @@ class Telegram extends CI_Controller {
 			'upload_path'	=>		'./uploads',
 			'allowed_types'	=>		'png',
 		];
-
 		$this->load->library('upload', $config);
 		$this->load->library('form_validation');
-
 		if( $this->upload->do_upload('image') ) {
-
 			$post = $this->input->post('body');
-
+			
 			$data = $this->upload->data();
 			$image_path = base_url("uploads/" . $data['raw_name'] . $data['file_ext']);
-
+			
             // telegram code
-
-                $token='303724118:AAEM1zlVreJQXAxsqrHH95a-TulbHyscuQs';
+                $token='303724118:AAGIVFW8T5W6L7XDYzX6XOshJEk9MGX9jYA';
                 $telegram = new TelegramBot\TelegramBot($token);
+				// $img = curl_file_create($image_path,'image/png');
 
-                // $telegram->sendMessage([
-                //     'chat_id' => '@subscribenaan',
-                //     'text' => $post
-                // ]);
-            
 
-                // $img = curl_file_create($image_path,'image/png');
-                
+// $telegram->sendMessage([
+//     'chat_id' => '@subscribenaan',
+//     'text' => 'Hello world!'
+// ]);
+
+
 
                 $telegram->sendPhoto([
                     'chat_id' => '@subscribenaan', 
                     'photo' => $image_path,
-                    'caption' => $post
+                    'caption' => 'hi'
                 ]);
             
-
-
-
             // telegram code
+
 			$post['image_path'] = $image_path;
 			return $this->_falshAndRedirect(
 					"Article Added Successully.",

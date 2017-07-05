@@ -62,6 +62,8 @@ class Subscribe extends CI_Controller {
 
         
     }
+
+	
 }
 
 /* End of file Subscribe.php */

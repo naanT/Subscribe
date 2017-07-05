@@ -1,14 +1,45 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+?>
+
 <!DOCTYPE html>
-<html lang="en">
-<head>
-	 <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Telegram</title>
-    <link rel="stylesheet" 
-        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
-        integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Sayings of the Messenger P.B.U.H</title>
+     <link rel="stylesheet" href="https://bootswatch.com/slate/bootstrap.min.css">
+       <?= link_tag('assets/css/ahadith.css') ?>
+  
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+      <nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Sayings Of the Messenger P.B.U.H</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li ><a href="<?php echo site_url('subscribe') ?>">Subscribe</a></li>
+        <li><a href="<?php echo site_url('message') ?>">Message</a></li>
+       <li  ><a href="<?php echo site_url('hadith') ?>">Hadith</a></li>
+       <li class="active"><a href="<?php echo site_url('twitter') ?>">Twitter</a></li>
+       <li ><a href="<?php echo site_url('telegram') ?>">Telegram</a></li>
+      </ul>
+     
+     
+    </div>
+  </div>
+</nav>
+     
+          
 </head>
 <body>
 

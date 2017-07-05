@@ -82,5 +82,21 @@ public function get_ids()
 
   }
 
+  public function get_hadith_info()
+  {
+    $query=$this->db->select(['*'])
+                      ->from('hadith')
+                      // ->order_by('created_at','D')
+                      ->get();
+
+    return $query->result_array();
+
+
+        // echo "<pre>";
+        //echo print_r($query->result_array());
+        // exit;
+        
+  }
+
 
 }

@@ -14,8 +14,8 @@ public function index()
 }
   public function submit()
   {
-    $smsGateway = new SmsGateway('raohannan1@gmail.com', 'hannan123');
-    $deviceID = 48750;
+    $smsGateway = new SmsGateway('ahmad@ahadith.net', 'Mus7563B');
+      $deviceID = 51553;
 
     $message=$this->input->post('text_message');
     $numbers=json_decode($this->input->post('phone'));
@@ -40,10 +40,15 @@ public function index()
 
   public function savestatus()
   {
-      $smsGateway = new SmsGateway('raohannan1@gmail.com', 'hannan123');
-      $deviceID = 48750;
+      $smsGateway = new SmsGateway('ahmad@ahadith.net', 'Mus7563B');
+      $deviceID = 51553;
     
       $ids=$this->Messagemodel->get_ids();
+
+    //   echo "<pre>";
+    //   echo $ids[0];
+    //   echo print_r($smsGateway->getMessage("39176902"));
+    //   exit;
 
       $re=array();
 
@@ -51,6 +56,10 @@ public function index()
         $re[] = $smsGateway->getMessage($ids[$i]);
 
       }
+
+    //   echo "<pre>";
+    //   echo print_r($re);
+    //   exit;
       
         $statusText=array();
       for ($j=0; $j < sizeof($re); $j++) {
