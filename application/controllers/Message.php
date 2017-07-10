@@ -18,9 +18,11 @@ public function index()
       $deviceID = 51553;
 
     $message=$this->input->post('text_message');
+
     $numbers=json_decode($this->input->post('phone'));
 
     $result = $smsGateway->sendMessageToManyNumbers($numbers, $message, $deviceID);
+
 
 
       for ($i=0; $i <sizeof($numbers); $i++)
@@ -42,7 +44,7 @@ public function index()
   {
       $smsGateway = new SmsGateway('ahmad@ahadith.net', 'Mus7563B');
       $deviceID = 51553;
-    
+
       $ids=$this->Messagemodel->get_ids();
 
     //   echo "<pre>";
@@ -60,12 +62,12 @@ public function index()
     //   echo "<pre>";
     //   echo print_r($re);
     //   exit;
-      
+
         $statusText=array();
       for ($j=0; $j < sizeof($re); $j++) {
         $statusText[]= $re[$j]["response"]["result"]["status"];
       }
-      
+
       $this->Messagemodel->save_status($ids,$statusText);
       echo json_encode($statusText);
   }
@@ -84,8 +86,8 @@ public function index()
 
   public function incoming()
   {
-      
-      
+
+
   }
 
 }

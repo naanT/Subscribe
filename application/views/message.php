@@ -9,12 +9,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <title>Sayings of the Messenger P.B.U.H</title>
      <link rel="stylesheet" href="https://bootswatch.com/slate/bootstrap.min.css">
        <?= link_tag('assets/css/ahadith.css') ?>
-  
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+       <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
 
 
 <script type="text/javascript">
+
+var entityMap = {
+   '&': '&amp;',
+  '<': '&lt;',
+  '>': '&gt;',
+  '"': '&quot;',
+  "'": "&#39;",
+  '/': '&#x2F;'
+};
+
+function escapeHtml (string) {
+  return String(string).replace(/[&<>"'\/]/g, function (s) {
+    return entityMap[s];
+  });
+}
     var no_of_contacts = 0;
     var name="";
     var phone="";
@@ -51,11 +68,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       $(".submit").click(function(event) {
         event.preventDefault();
         var number= new Array();
-         for (var i = 1; i<=no_of_contacts; i++) {
-            number[i-1] = $("#no"+i) .val();
+        var count=0;
+        console.log("no of contacts:"+ no_of_contacts);
+         for (var i = 0; i<no_of_contacts; i++) {
+           if($('#no' + (i+1)).is(":checked")==true)
+           {
+             number[count] = $("#no"+ (i+1)).val();
+             count=count+1;
+           }
         }
-            var textarea = $('#textArea').val();
+        console.log("number:"+ number);
+            var textarea1 = $('#textArea').val();
 
+            var textarea= escapeHtml(textarea1);
         jQuery.ajax({
           type: "POST",
           url: "<?php echo base_url(); ?>" + "message/submit",
@@ -65,6 +90,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             phone        : JSON.stringify(number)
           },
         success: function(res) {
+
           alert("sending...");
           $.get("<?php echo base_url(); ?>" + "message/savestatus",
                 function(res, status){
@@ -84,7 +110,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                     for (var i = 0; i < textstatus.length; i++) {
                       var ele=document.getElementsByClassName("info");
-                      
+
                       ele[i].innerHTML=textstatus[i];
                     }
                   });
@@ -113,8 +139,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
        <li ><a href="<?php echo site_url('twitter') ?>">Twitter</a></li>
        <li ><a href="<?php echo site_url('telegram') ?>">Telegram</a></li>
       </ul>
-     
-     
+
+
     </div>
   </div>
 </nav>
@@ -130,12 +156,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div>
     </div>
     <hr>
-    
-    <div class="row"> 
-      <?php echo form_open('message/submit',['class' => 'form-horizontal']) ;?>
+
+    <div class="row">
+      <?php echo form_prep('message/submit',['class' => 'form-horizontal','accept-charset'=>'UTF-8']) ;?>
         <fieldset>
 
-        <div class="col-lg-12 col-lg-offset-2"> 
+        <div class="col-lg-12 col-lg-offset-2">
           <div class="form-group">
             <div class="col-lg-8">
                 <?php echo form_textarea(['class' => 'form-control' ,
@@ -144,7 +170,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           </div>
         </div>
 
-          
+
 
           <div class="col-lg-8 col-lg-offset-2">
             <table class="table table-striped table-hover ">
@@ -152,7 +178,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </tbody>
             </table>
           </div>
-            
+
 
           <div class="col-lg-8 col-lg-offset-3">
             <div class="form-group">
@@ -168,8 +194,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <?php echo form_close();?>
 
     </div>
-        
+
     </div>
+
     <!--<script>
             CKEDITOR.replace( 'editor1' );
         </script>-->
