@@ -21,12 +21,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
      $(".submit").click(function(event) {
        event.preventDefault();
 
-       if ($("#inputName").val() == "") {
-         document.getElementById('textd').innerHTML="Username Required";
-         document.getElementById('validName').style.visibility='visible';
-       }
-       else {
-         var name = $("#inputName").val();
+
          var str=document.getElementsByClassName("selected-flag")[0].title;
          var code=str.substr(str.indexOf("+") + 0);
          var phone=$("#phone").val();
@@ -36,7 +31,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
            phone=phone.substring(1);
            phone=Number(phone);
          }
-         
+
 
 
          phone=code+phone;
@@ -47,17 +42,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
            jQuery.ajax({
              type: "POST",
-             url: "<?php echo base_url(); ?>" + "subscribe/submit",
+             url: "<?php echo base_url(); ?>" + "unsubscribe/submit",
              data:
              {
-               name : name,
                phone: phone
              },
            success: function(res) {
                      console.log(res);
-                     document.getElementById('validName').style.visibility='hidden';
-                     document.getElementById('validPassword').style.visibility='hidden';
-                     if(res == "JazakhAllah! You are Now Subscribed!")
+                     if(res == "You are Now Unsubscribed!")
                      {
                        document.getElementById('validPassword').style.visibility='visible';
                        document.getElementById('texts').innerHTML=res;
@@ -74,7 +66,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                alert("error");
           }
          });
-       }
    });
  });
      </script>
@@ -112,8 +103,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <div class="container">
             <div class="row">
                   <div class="col-lg-12">
-                        <h1 class="text-center">Do You want to get the Ahadith on Your Phone?</h1>
-                        <h4 class="text-center">Fill the Form Below to Subscribe</h4>
+                        <h4 class="text-center">Fill the Form Below to UnSubscribe</h4>
                   </div>
             </div>
             <hr>
@@ -128,20 +118,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
             <div class="row">
                   <div class="col-lg-12 col-lg-offset-2">
-                        <?php echo form_open('/subscribe/submit', ['class'=>'form-horizontal','id'=>'subscribeForm']); ?>
+                        <?php echo form_open('/unsubscribe/submit', ['class'=>'form-horizontal','id'=>'subscribeForm']); ?>
                         <fieldset>
-                        <div class="row">
-                              <div class="col-lg-6 col-lg-offset-2">
-                                    <div class="form-group">
-                                    <label for="inputName" class="col-lg-2 control-label">Name</label>
-                                          <div class="col-lg-6">
-                                                <?php echo form_input(['class'=>'form-control','id'=>'inputName','placeholder'=>'Name',
-                                                'name' => 'inputName','value' => set_value('inputName')]); ?>
-                                          </div>
-                                     </div>
-                              </div>
-                        </div>
-
                         <div class="row">
                               <div class="col-lg-6 col-lg-offset-2">
                                     <div class="form-group">

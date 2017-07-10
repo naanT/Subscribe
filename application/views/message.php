@@ -52,6 +52,8 @@ function escapeHtml (string) {
                   component+='<input type="checkbox"';
                   component+='id=';
                   component+=temp+no;
+                  component+=' name=';
+                  component+='foo';
                   component+=' value=';
                   component+=myObj[x].phone ;
                   component+='>';
@@ -118,6 +120,14 @@ function escapeHtml (string) {
 
     });
   </script>
+  <script type="text/javascript">
+  function toggle(source) {
+  checkboxes = document.getElementsByName('foo');
+  for(var i=0, n=checkboxes.length;i<n;i++) {
+    checkboxes[i].checked = source.checked;
+  }
+}
+  </script>
 
   <nav class="navbar navbar-default">
   <div class="container-fluid">
@@ -170,8 +180,19 @@ function escapeHtml (string) {
           </div>
         </div>
 
+        <div style="height:6px;">
 
+        </div>
 
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2">
+            <input type="checkbox" onClick="toggle(this)" /> Check All<br/>
+          </div>
+        </div>
+
+        <div style="height:35px;">
+
+        </div>
           <div class="col-lg-8 col-lg-offset-2">
             <table class="table table-striped table-hover ">
                 <tbody id="r">
